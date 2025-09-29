@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Операции{% endblock %}
+
+{% block body %}
+<h1>Операции</h1>
+
+<form method="get" class="row" style="margin-bottom:12px;">
+  <label>От:
+    <input type="date" name="date_from" value="{{ saved_filters.date_from }}">
+  </label>
+  <label>До:
+    <input type="date" name="date_to" value="{{ saved_filters.date_to }}">
+  </label>
+
+  <label>Тип:
+    <select name="type">
+      <option value="">—</option>
+      {% for x in types %}
+        <option value="{{ x.id }}"{% if saved_filters.type == x.id %} selected {% endif %}>{{ x.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>Статус:
+    <select name="status">
+      <option value="">—</option>
+      {% for x in statuses %}
+        <option value="{{ x.id }}"{% if saved_filters.status == x.id %} selected {% endif %}>{{ x.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>Категория:
+    <select name="category">
+      <option value="">—</option>
+      {% for x in categories %}
+        <option value="{{ x.id }}"{% if saved_filters.category == x.id %} selected {% endif %}>{{ x.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>Подкатегория:
+    <select name="subcategory">
+      <option value="">—</option>
+      {% for x in subcategories %}
+        <option value="{{ x.id }}"{% if saved_filters.subcategory == x.id %} selected {% endif %}>{{ x.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <button type="submit">Фильтровать</button>
+  <a href="{% url 'cashflow_create' %}">+ Новая запись</a>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Дата</th>
+      <th>Тип</th>
+      <th>Статус</th>
+      <th>Категория</th>
+      <th>Подкатегория</th>
+      <th>Сумма</th>
+      <th>Комментарий</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for it in items %}
+      <tr>
+        <td>{{ it.date }}</td>
+        <td>{{ it.type }}</td>
+        <td>{{ it.status }}</td>
+        <td>{{ it.category }}</td>
+        <td>{{ it.subcategory|default:"—" }}</td>
+        <td>{{ it.amount|floatformat:2 }}</td>
+        <td>{{ it.comment }}</td>
+        <td class="actions"><a href="{% url 'cashflow_update' it.id %}">Изменить</a></td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="8">Нет записей</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

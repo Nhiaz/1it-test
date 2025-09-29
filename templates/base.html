@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{% block title %}CashFlow{% endblock %}</title>
+  <style>
+    body{font-family:Arial,sans-serif; margin:20px;}
+    table{border-collapse:collapse; width:100%;}
+    th,td{border:1px solid #ddd; padding:8px;}
+    th{background:#f6f6f6; text-align:left;}
+    .row{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+    input,select{padding:6px;}
+    .error{color:#b00020; margin:.5rem 0;}
+    .actions a, .actions button{margin-right:8px;}
+  </style>
+</head>
+<body>
+  {% block body %}{% endblock %}
+</body>
+</html>
