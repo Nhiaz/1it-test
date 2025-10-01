@@ -64,7 +64,7 @@ uv run manage.py runserver
 ---
 ## Команда заполнения справочников
 ```bash
-uv run python manage.py seed_refs
+uv run manage.py seed_refs
 ```
 Добавляет примеры типов, статусов, категорий и подкатегорий.
 
